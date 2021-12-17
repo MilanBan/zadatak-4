@@ -1,0 +1,15 @@
+{
+    "name": "thinkpad-e580/zadatak-4",
+    "authors": [
+        {
+            "name": "Milan Bancevic",
+            "email": "m.bancevic@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
