@@ -1,23 +1,17 @@
+<?php
+use app\core\form\Form;
+?>
+
 <h1>Register page</h1>
 
-<form action="" method="post">
-  <div class="row">
-    <div class="col mb-3">
-      <input type="username" name="username" class="form-control" placeholder="Username">
-    </div>
-    <div class="col mb-3">
-      <input type="email" name="email" class="form-control" placeholder="email">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col mb-3">
-      <input type="password" name="password" class="form-control" placeholder="Password">
-    </div>
-    <div class="col mb-3">
-      <input type="password" name="password_confirm" class="form-control" placeholder="Confirm Password">
-    </div>
-  </div>
-  
+<?php $form = Form::begin( '', "post" )?>
+
+  <?php echo $form->field( $model, 'username' ) ?>
+  <?php echo $form->field( $model, 'email' ) ?>
+  <?php echo $form->field( $model, 'password' )->passwordField() ?>
+  <?php echo $form->field( $model, 'password_confirm' )->passwordField() ?>
+
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+<?php echo Form::end() ?>
+
