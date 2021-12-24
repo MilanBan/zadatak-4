@@ -4,7 +4,7 @@ namespace app\core;
 
 class Database {
 
-  public \PDO$pdo;
+  public \PDO $pdo;
 
   public function __construct( array $config ) {
     $dsn = $config['dsn'] ?? '';
@@ -63,6 +63,10 @@ class Database {
       $str
       " );
     $stmt->execute();
+  }
+
+  public function prepare( $sql ) {
+    return $this->pdo->prepare( $sql );
   }
 
   protected function log( $message ) {
