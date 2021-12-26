@@ -1,13 +1,17 @@
-<h1>Login <?php echo $msg ?></h1>
+<?php
+/** @var $model \app\models\User  */
 
-<form action="" method="post">
-  <div class="mb-3">
-    <input type="email" name="email" class="form-control" placeholder="email">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <input type="password" name="password" class="form-control" placeholder="password">
-  </div>
-  
+use app\core\form\Form;
+?>
+
+<h1>Login page</h1>
+
+<?php $form = Form::begin( '', "post" )?>
+
+  <?php echo $form->field( $model, 'email' ) ?>
+  <?php echo $form->field( $model, 'password' )->passwordField() ?>
+
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+<?php echo Form::end() ?>
+
