@@ -21,6 +21,23 @@ abstract class Model {
 
   abstract public function rules(): array;
 
+  public function labels(): array
+  {
+    return [];
+  }
+
+  public function getLabel( $attribute ) {
+    return $this->labels()[$attribute] ?? $attribute;
+  }
+
+  public function placeHolders(): array
+  {
+    return [];
+  }
+
+  public function getPlaceholder( $attribute ) {
+    return $this->placeHolders()[$attribute] ?? $attribute;}
+
   public array $errors = [];
 
   public function validate() {
@@ -56,7 +73,7 @@ abstract class Model {
           $stmt->execute();
           $record = $stmt->fetchObject();
           if ( $record ) {
-            $this->addError( $attribute, self::RULE_UNIQUE, ['field' => $attribute] );
+            $this->addError( $attribute, self::RULE_UNIQUE, ['field' => $this->getLabel( $attribute )] );
           }
         }
       }

@@ -24,7 +24,7 @@ class User extends DbModel {
   {
     return [
       'username'         => [self::RULE_REQUIRED],
-      'email'            => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' =>self::class]],
+      'email'            => [self::RULE_REQUIRED, self::RULE_EMAIL, [self::RULE_UNIQUE, 'class' => self::class]],
       'password'         => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8], [self::RULE_MAX, 'max' => 24]],
       'password_confirm' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']],
     ];
@@ -33,5 +33,25 @@ class User extends DbModel {
   public function attributes(): array
   {
     return ['username', 'email', 'password'];
+  }
+
+  public function labels(): array
+  {
+    return [
+      'username'         => 'Username',
+      'email'            => 'Email',
+      'password'         => 'Password',
+      'password_confirm' => 'Confirm password',
+    ];
+  }
+
+  public function placeHolders(): array
+  {
+    return [
+      'username'         => 'Enter your username',
+      'email'            => 'Enter your email address',
+      'password'         => 'Enter your password',
+      'password_confirm' => 'Confirm your password',
+    ];
   }
 }

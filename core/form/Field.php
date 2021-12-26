@@ -25,18 +25,20 @@ class Field {
     return sprintf(
       '
         <div class="form-group mb-3">
+          <label>%s</label>
           <input type="%s" name="%s" value="%s" class="form-control%s" placeholder="%s">
           <div class="invalid-feedback">
             %s
           </div>
         </div>
       ',
-      $this->type,
-      $this->attribute,
-      $this->model->{$this->attribute},
-      $this->model->hasError( $this->attribute ) ? ' is-invalid' : '',
-      $this->attribute,
-      $this->model->getFirstError( $this->attribute )
+      $this->model->getLabel($this->attribute), //label
+      $this->type, // type
+      $this->attribute, //name
+      $this->model->{$this->attribute}, //value
+      $this->model->hasError( $this->attribute ) ? ' is-invalid' : '', // class
+      $this->model->getPlaceholder($this->attribute), // placeholder
+      $this->model->getFirstError( $this->attribute ) //error
     );
   }
 
