@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use app\models\User;
+use app\core\Application;
+use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
-use app\core\Controller;
-use app\core\Application;
 use app\models\LoginForm;
+use app\models\User;
 
 class AuthController extends Controller {
 
@@ -23,7 +23,7 @@ class AuthController extends Controller {
     }
     $this->setLayout( 'auth' );
     return $this->render( 'login', [
-      'model' => $loginForm
+      'model' => $loginForm,
     ] );
   }
 
@@ -42,10 +42,16 @@ class AuthController extends Controller {
       ] );
 
     }
+    
     $this->setLayout( 'auth' );
     return $this->render( 'register', [
       'model' => $user,
     ] );
+  }
+
+  public function logout( Request $request, Response $response ) {
+    Application::$app->logout();
+    $response->redirect( '/' );
   }
 
 }

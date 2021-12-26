@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use app\core\DbModel;
+use app\core\UserModel;
 
-class User extends DbModel {
+class User extends UserModel {
 
   public string $username = '';
   public string $email = '';
@@ -57,5 +57,9 @@ class User extends DbModel {
       'password'         => 'Enter your password',
       'password_confirm' => 'Confirm your password',
     ];
+  }
+
+  public function getDisplayName(): string {
+    return $this->username;
   }
 }
