@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\AuthController;
+use app\controllers\SiteController;
 use app\core\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -18,8 +19,8 @@ $config = [
 
 $app = new Application( dirname( __DIR__ ), $config );
 
-$app->router->get( '/', 'home' );
-$app->router->get( '/users', 'users' );
+$app->router->get( '/', [SiteController::class, 'home'] );
+$app->router->get( '/users', [SiteController::class, 'user'] );
 
 $app->router->get( '/login', [AuthController::class, 'login'] );
 $app->router->post( '/login', [AuthController::class, 'login'] );

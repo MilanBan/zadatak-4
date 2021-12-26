@@ -26,4 +26,5 @@ abstract class DbModel extends Model {
   public function prepare( $sql ) {
     return Application::$app->db->pdo->prepare( $sql );
   }
+  
 }
