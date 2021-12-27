@@ -1,4 +1,5 @@
 <?php
+$this->title = 'Error';
 
 ?>
 
