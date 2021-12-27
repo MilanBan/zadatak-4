@@ -30,6 +30,9 @@ use app\core\Application;
         <li class="nav-item">
           <a class="nav-link" href="/users">Users</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">profile</a>
+        </li>
       </ul>
 <?php if ( Application::isGuest() ): ?>
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
@@ -49,7 +52,7 @@ use app\core\Application;
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                <li><a class="dropdown-item" href="/logout">Log out</a></li>
+                <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
           </div>  
         </li>
