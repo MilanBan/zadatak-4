@@ -1,0 +1,45 @@
+<?php
+
+namespace app\core;
+
+abstract class DbModel extends Model {
+
+  abstract public static function tableName(): string;
+
+  abstract public function attributes(): array;
+
+  abstract static public function primaryKey(): string;
+
+  public function save() {
+    $tableName = $this->tableName();
+    $attributes = $this->attributes();
+    $params = array_map( fn( $attr ) => ":$attr", $attributes );
+    $apiKey = implode( '-', str_split( substr( strtolower( md5( microtime() . rand( 1000, 9999 ) ) ), 0, 30 ), 6 ) );
+    $stmt = self::prepare( "INSERT INTO $tableName (" . implode( ',', $attributes ) . ",api_key)
+      VALUES(" . implode( ',', $params ) . ", '$apiKey')" );
+    foreach ( $attributes as $attribute ) {
+      $stmt->bindValue( ":$attribute", $this->{$attribute} );
+    }
+
+    $stmt->execute();
+    return true;
+  }
+
+  public static function prepare( $sql ) {
+    return Application::$app->db->pdo->prepare( $sql );
+  }
+
+  public static function findOne( $where ) {
+    $tableName = static::tableName();
+    $attributes = array_keys( $where );
+    $sql = implode( "AND ", array_map( fn( $attr ) => "$attr = :$attr", $attributes ) );
+    $statement = self::prepare( "SELECT * FROM $tableName WHERE $sql" );
+    foreach ( $where as $key => $item ) {
+      $statement->bindValue( ":$key", $item );
+    }
+
+    $statement->execute();
+    return $statement->fetchObject( static::class );
+  }
+
+}
